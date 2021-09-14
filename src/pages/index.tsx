@@ -1,7 +1,8 @@
 import styled from 'styled-components'
+import { Sidebar } from '../components/Sidebar'
 
 export default function Home() {
-  return <Title>Hello</Title>
+  return <Sidebar />
 }
 
 const Title = styled.h1`
