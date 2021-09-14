@@ -3,19 +3,23 @@ import styled, { css } from 'styled-components'
 export const Container = styled.div`
   box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
   background-color: #FFFFFF;
-  max-width: 18rem;
   padding: 1rem;
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
+  position: fixed;
+  width: 18rem;
+  top: 10rem;
   `
 
 export const Header = styled.div`
   color: #FFF;
   font-size: 1.5rem;
   font-weight: 600;
+  position: fixed;
+  width: 18rem;
+  top: 6rem;
   padding: 1rem;
   background-color: #01B4E4;
-  max-width: 18rem;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
@@ -44,7 +48,8 @@ const linkModifiers = {
 
 export const Link = styled.a<LinkProps>`
   ${({ active }) => css`
-
+    text-decoration: none;
+    color: #000;
     display: flex;
     align-items: center;
     justify-content: space-between;
