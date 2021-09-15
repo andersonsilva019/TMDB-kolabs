@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import * as S from './styles'
-
+import { useMovies } from '../../hooks/useMovies'
 
 export function Sidebar() {
 
   const { asPath } = useRouter()
+
+  const { totalResults: totalResultMovies } = useMovies()
 
   return (
     <div style={{ width: '100%' }}>
@@ -15,7 +17,7 @@ export function Sidebar() {
         <Link href="/movies" passHref>
           <S.Link active={asPath === '/movies'}>
             <S.Title>Filmes</S.Title>
-            <S.Quantity>20</S.Quantity>
+            <S.Quantity>{totalResultMovies?.length}</S.Quantity>
           </S.Link>
         </Link>
 

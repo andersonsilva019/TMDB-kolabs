@@ -29,6 +29,7 @@ export const Quantity = styled.div`
   background-color: #eee;
   padding: 0.25rem 0.5rem;
   border-radius: 2rem;
+  color: #000;
 `
 
 type LinkProps = {
