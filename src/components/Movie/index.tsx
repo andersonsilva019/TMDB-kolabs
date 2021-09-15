@@ -1,6 +1,7 @@
 import * as S from './styles'
 
 export type MovieProps = {
+  id: number
   img: string
   title: string
   description: string
