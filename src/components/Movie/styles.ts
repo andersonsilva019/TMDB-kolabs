@@ -4,6 +4,13 @@ export const Container = styled.li`
   display: flex;
   box-shadow: 0 2px 8px rgb(0, 0, 0, 0.1);
   border-radius: 0.5rem;
+  cursor: pointer;
+
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateX(0.75rem);
+  }
 
   &:not(:last-child){
     margin-bottom: 1.5rem;
