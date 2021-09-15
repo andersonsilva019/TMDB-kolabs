@@ -1,68 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Movie, MovieProps } from "../../components/Movie";
+import { useMovies } from '../../hooks/useMovies';
 import { BaseTemplate } from "../Base";
 
 export type MoviesTemplateProps = {
   movies: MovieProps[]
 }
 
-type ResponseData = {
-  results: Array<{
-    id: number,
-    poster_path: string
-    title: string
-    overview: string
-    release_date: string
-  }>
-}
-
 import * as S from './styles'
-
 
 export function Movies({ movies }: MoviesTemplateProps) {
 
-  const [currentPage, setCurrentPage] = useState(1)
-
-  const [totalResults, setTotalResults] = useState<MovieProps[]>(movies)
-
-  const getMoviesByPage = async () => {
-
-    if (currentPage === 1) {
-      return
-    }
-
-    const language = 'pt-BR'
-
-    const endpoint = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=${language}&page=${currentPage}`
-
-    const response = await fetch(endpoint, { method: 'GET' })
-
-    const data: ResponseData = await response.json()
-
-    const results = data.results.map((movie) => {
-      return {
-        id: movie.id,
-        img: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
-        title: movie.title,
-        description: movie.overview,
-        releaseDate: movie.release_date
-      }
-    })
-
-    setTotalResults([...totalResults, ...results])
-  }
+  const {
+    setTotalResults,
+    totalResults,
+    nextPage
+  } = useMovies()
 
   useEffect(() => {
-    getMoviesByPage()
-  }, [currentPage])
-
-  const nextPage = () => {
-    setCurrentPage(prev => prev + 1)
-  }
+    setTotalResults(movies)
+  }, [])
 
   return (
     <BaseTemplate>
-      {totalResults.map(movie => (
+      {(totalResults || movies)?.map(movie => (
         <Movie {...movie} key={movie.id} />
       ))}
       <S.ShowMore onClick={nextPage}>
