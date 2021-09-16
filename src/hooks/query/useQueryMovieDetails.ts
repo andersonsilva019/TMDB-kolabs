@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer } from "react";
+import { useCallback, useReducer } from "react";
 import { MovieDetailsProps } from "../../components/MovieDetails";
 
 const REQUEST_STATUS = {

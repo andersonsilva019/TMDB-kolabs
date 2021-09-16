@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
-import { Crew, MovieDetails } from '../MovieDetails'
+import { useCallback, useState } from 'react'
 import { MovieModal } from '../MovieModal'
 import * as S from './styles'
 
