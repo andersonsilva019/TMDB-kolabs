@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react'
-import { MovieDetails, MovieDetailsProps } from '../MovieDetails'
+import { useEffect } from 'react'
+import { useQueryMovieDetails } from '../../hooks/query/useQueryMovieDetails'
+import { MovieDetails } from '../MovieDetails'
+
+import BounceLoader from "react-spinners/BounceLoader";
 
 import * as S from './styles'
 
@@ -9,9 +12,13 @@ type MovieModalProps = {
   closeModal: () => void
 }
 
-export function MovieModal({ closeModal, isOpenModal, movieId }: MovieModalProps) {
+export function MovieModal({
+  closeModal,
+  isOpenModal,
+  movieId
+}: MovieModalProps) {
 
-  const [movieDetails, setMovieDetails] = useState<MovieDetailsProps>()
+  const { movieDetails, getDetails, isLoading } = useQueryMovieDetails(movieId)
 
   useEffect(() => {
     const handleKeyUp = ({ key }: KeyboardEvent) =>
@@ -24,33 +31,6 @@ export function MovieModal({ closeModal, isOpenModal, movieId }: MovieModalProps
 
 
   useEffect(() => {
-    const getDetails = async () => {
-      const [responseMovieDetails, responseMovieCredits] = await Promise.all([
-        fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=pt-BR`),
-        fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}&language=pt-BR`),
-      ])
-
-      const dataMovieDetails = await responseMovieDetails.json()
-      const dataMovieCredits = await responseMovieCredits.json()
-
-      let genresOfMovie = []
-
-      for (let i in dataMovieDetails.genres) {
-        genresOfMovie.push(dataMovieDetails.genres[i].name)
-      }
-
-      const movieInfo: MovieDetailsProps = {
-        img: `https://image.tmdb.org/t/p/w500${dataMovieDetails.poster_path}`,
-        date: dataMovieDetails.release_date,
-        crew: dataMovieCredits.crew,
-        genres: genresOfMovie,
-        sinopse: dataMovieDetails.overview,
-        title: dataMovieDetails.title
-      }
-
-      setMovieDetails(movieInfo)
-    }
-
     isOpenModal && getDetails()
   }, [isOpenModal, movieId])
 
@@ -65,8 +45,13 @@ export function MovieModal({ closeModal, isOpenModal, movieId }: MovieModalProps
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </S.Close>
+
       <S.ContentModal>
-        <MovieDetails {...movieDetails} />
+        {isLoading ? (
+          <S.SpinnerBox>
+            <BounceLoader color="#01B4E4" loading={isLoading} size={80} />
+          </S.SpinnerBox>
+        ) : (<MovieDetails {...movieDetails} />)}
       </S.ContentModal>
     </S.Modal>
   )
