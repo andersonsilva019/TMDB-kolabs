@@ -26,3 +26,9 @@ export const ShowMore = styled.button`
   }
   
 `
+
+export const Title = styled.h2`
+  color: #000;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+`

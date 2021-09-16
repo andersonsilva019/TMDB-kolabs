@@ -23,6 +23,7 @@ export function Movies({ movies }: MoviesTemplateProps) {
 
   return (
     <BaseTemplate>
+      <S.Title>Filmes Populares</S.Title>
       {(totalResults || movies)?.map(movie => (
         <Movie {...movie} key={movie.id} />
       ))}
