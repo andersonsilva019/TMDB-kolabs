@@ -104,7 +104,7 @@ export function useQuerySerieDetails(serieId: number) {
       dispatch({
         type: REQUEST_STATUS.RESOLVED,
         payload: {
-          error: 'Ops...Ocorreu um errro ao buscar as informações deste filme!'
+          error: 'Ops...Ocorreu um errro ao buscar as informações desta série!'
         }
       })
     }
