@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { formatDate } from '../../utils/formateDate'
 import { SerieModal } from '../SerieModal'
 
 import * as S from './styles'
@@ -35,7 +36,7 @@ export function Serie({
         <S.Image src={img} alt={title} />
         <S.Content>
           <S.Title>{title}</S.Title>
-          <S.ReleaseDate>{firstAirDate}</S.ReleaseDate>
+          <S.ReleaseDate>{formatDate(firstAirDate)}</S.ReleaseDate>
           <S.Description>{description}</S.Description>
         </S.Content>
       </S.Container >

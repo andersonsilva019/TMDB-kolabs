@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { formatDate } from '../../utils/formateDate'
 import { MovieModal } from '../MovieModal'
 import * as S from './styles'
 
@@ -34,7 +35,7 @@ export function Movie({
         <S.Image src={img} alt={title} />
         <S.Content>
           <S.Title>{title}</S.Title>
-          <S.ReleaseDate>{releaseDate}</S.ReleaseDate>
+          <S.ReleaseDate>{formatDate(releaseDate)}</S.ReleaseDate>
           <S.Description>{description}</S.Description>
         </S.Content>
       </S.Container >
