@@ -52,6 +52,9 @@ ou
 
 A aplicação está rodando em um servidor local, porta 3000.
 > http://localhost:3000/movies
+
+## Link da aplicação 
+> https://tmdb-kolabs.vercel.app/movies
 ## Consideração finais
 
 Para este desafio, essa foi a minha implementação. Portanto, novas features poderiam ser implementadas, tais como:
