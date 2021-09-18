@@ -3,12 +3,22 @@ import { BaseTemplate } from "../Base";
 import { Person, PersonProps } from "../../components/Person";
 
 import * as S from './styles';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { PersonContext } from '../../context/PersonContext';
 
 export type PersonsTemplateProps = {
   persons: PersonProps[]
 }
 
 export function Persons({ persons }: PersonsTemplateProps) {
+
+  const { updateTotalResultsPerson } = useContext(PersonContext)
+
+  useEffect(() => {
+    updateTotalResultsPerson(persons.length)
+  }, [persons.length])
+
   return (
     <>
       <Head>

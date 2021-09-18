@@ -3,12 +3,15 @@ import Link from 'next/link'
 import { useMovies } from '../../hooks/useMovies'
 import { useSeries } from '../../hooks/useSeries'
 import * as S from './styles'
+import { useContext } from 'react'
+import { PersonContext } from '../../context/PersonContext'
 
 export function Sidebar() {
 
   const { asPath } = useRouter()
+  const { totalResultsPerson } = useContext(PersonContext)
 
-  const { totalResults: totalResultMovies } = useMovies()
+  const { totalResults: totalResultsMovies } = useMovies()
 
   const { series } = useSeries()
 
@@ -19,21 +22,21 @@ export function Sidebar() {
         <Link href="/movies" passHref>
           <S.Link active={asPath === '/movies'}>
             <S.Title>Filmes</S.Title>
-            <S.Quantity>{totalResultMovies?.length ?? 0}</S.Quantity>
+            {totalResultsMovies?.length > 0 && <S.Quantity>{totalResultsMovies.length}</S.Quantity>}
           </S.Link>
         </Link>
 
         <Link href="/series" passHref>
           <S.Link active={asPath === '/series'}>
             <S.Title>Séries</S.Title>
-            <S.Quantity>{series.length ?? 0}</S.Quantity>
+            {series.length > 0 && <S.Quantity>{series.length}</S.Quantity>}
           </S.Link>
         </Link>
 
         <Link href="/persons" passHref>
           <S.Link active={asPath === '/persons'}>
             <S.Title>Pessoas</S.Title>
-            <S.Quantity>20</S.Quantity>
+            {totalResultsPerson && <S.Quantity>{totalResultsPerson}</S.Quantity>}
           </S.Link>
         </Link>
 
