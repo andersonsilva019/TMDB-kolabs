@@ -16,7 +16,7 @@ export const PersonContext = createContext({} as PersonContextType)
 
 export function PersonContexProvider({ children }: PersonContexProvider) {
 
-  const [totalResultsPerson, setTotalResultsPerson] = useState(0)
+  const [totalResultsPerson, setTotalResultsPerson] = useState(null)
 
   const updateTotalResultsPerson = useCallback((total: number) => {
     setTotalResultsPerson(total)
